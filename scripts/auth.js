@@ -2,11 +2,30 @@
 
 // Authentication Page JavaScript - AlphaFlow
 const AuthPage = {
-  InputValidator: {},
-  AuthManager: {},
-  appDB: {},
+  InputValidator: null,
+  AuthManager: null,
+  appDB: null,
 
   async init() {
+    // Inicializa os modulos (classes definidas globalmente)
+    this.InputValidator = InputValidator
+    this.AuthManager = AuthManager
+    
+    // Inicializa o banco de dados IndexedDB
+    this.appDB = new AlphaDB()
+    try {
+      await this.appDB.init()
+      console.log("[v0] Banco de dados inicializado com sucesso")
+    } catch (error) {
+      console.error("[v0] Erro ao inicializar banco de dados:", error)
+    }
+
+    // Verifica se usuario ja esta logado - redireciona para area de investimentos
+    if (this.AuthManager.isAuthenticated()) {
+      window.location.href = "index.html"
+      return
+    }
+
     this.initParticles()
     this.initForms()
     this.checkURLParams()
@@ -109,36 +128,65 @@ const AuthPage = {
   },
 
   async handleSignup() {
-    const name = this.InputValidator.sanitizeString(document.getElementById("signup-name").value.trim())
-    const email = this.InputValidator.sanitizeString(document.getElementById("signup-email").value.trim().toLowerCase())
+    const nameRaw = document.getElementById("signup-name").value.trim()
+    const emailRaw = document.getElementById("signup-email").value.trim().toLowerCase()
     const password = document.getElementById("signup-password").value
     const confirmPassword = document.getElementById("signup-password-confirm").value
     const notificationsOpt = document.getElementById("notifications-opt").checked
     const termsCheck = document.getElementById("terms-check").checked
 
     // Validations
-    if (!name || !email || !password || !confirmPassword) {
+    if (!nameRaw || !emailRaw || !password || !confirmPassword) {
       this.showToast("Preencha todos os campos!", "warning")
       return
     }
 
-    if (!this.InputValidator.validateName(name)) {
-      this.showToast("Nome deve conter apenas letras e espaços", "error")
+    // Validacao de nome - bloqueia numeros
+    const nameHasNumbers = /\d/.test(nameRaw)
+    if (nameHasNumbers) {
+      this.showToast("Nome nao pode conter numeros!", "error")
       return
     }
 
-    if (!this.InputValidator.validateEmail(email)) {
-      this.showToast("Email inválido", "error")
+    // Validacao de nome - apenas letras e espacos
+    const namePattern = /^[A-Za-zÀ-ÿ\s]+$/
+    if (!namePattern.test(nameRaw)) {
+      this.showToast("Nome deve conter apenas letras e espacos", "error")
       return
     }
 
-    if (!this.InputValidator.validateEmailProvider(email)) {
-      this.showToast("Use email @gmail, @hotmail, @outlook ou @yahoo", "error")
+    // Validacao de nome - minimo 3 caracteres
+    if (nameRaw.length < 3) {
+      this.showToast("Nome deve ter pelo menos 3 caracteres", "error")
       return
     }
 
-    if (!this.InputValidator.validatePassword(password)) {
-      this.showToast("Senha deve ter 6+ caracteres com letras e números", "error")
+    // Validacao de email - obrigatorio @gmail.com
+    if (!emailRaw.endsWith("@gmail.com")) {
+      this.showToast("Email deve terminar com @gmail.com", "error")
+      return
+    }
+
+    // Validacao de email - parte antes do @ nao pode ser muito grande (max 20 caracteres)
+    const emailLocalPart = emailRaw.split("@")[0]
+    if (emailLocalPart.length > 20) {
+      this.showToast("Email muito longo! Maximo 20 caracteres antes do @", "error")
+      return
+    }
+
+    // Validacao de email - parte antes do @ minimo 3 caracteres
+    if (emailLocalPart.length < 3) {
+      this.showToast("Email deve ter pelo menos 3 caracteres antes do @", "error")
+      return
+    }
+
+    // Sanitiza depois de validar
+    const name = this.InputValidator.sanitizeString(nameRaw)
+    const email = this.InputValidator.sanitizeString(emailRaw)
+
+    // Validacao de senha - minimo 6 caracteres
+    if (password.length < 6) {
+      this.showToast("Senha deve ter pelo menos 6 caracteres", "error")
       return
     }
 
