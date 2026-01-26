@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlphaFlow | Sua Plataforma de Análise e Educação Financeira</title>
+    <link rel="stylesheet" href="styles/landing.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas id="particles-canvas"></canvas>
+    
+    <header class="landing-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo-icon"><i class="fas fa-cube"></i></div>
+                <span class="logo-text">AlphaFlow</span>
+            </div>
+            <nav class="header-nav">
+                <a href="#sobre">Sobre</a>
+                <a href="#recursos">Recursos</a>
+                <a href="#planos">Planos</a>
+            </nav>
+            <div class="auth-section">
+                <div id="user-indicator" class="user-badge hidden" onclick="Landing.showUserMenu()">
+                    <div class="user-avatar"><i class="fas fa-user"></i></div>
+                    <span id="user-name-header">Usuário</span>
+                </div>
+                <button class="btn-ghost" id="auth-trigger" onclick="Landing.goToAuth()">Entrar ou Criar Conta</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title" data-text="Decisões">Decisões</h1>
+            <p class="hero-subtitle">Onde dados se transformam em clareza e confiança</p>
+            <button class="cta-primary" onclick="Landing.goToAuth()">Começar Agora <i class="fas fa-arrow-right"></i></button>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <section class="about-section" id="sobre">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">QUEM SOMOS</span>
+                <h2>Seu tradutor de mercado</h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-card" data-aos="fade-up" data-delay="0">
+                    <div class="icon-box"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>Educação em Primeiro Lugar</h3>
+                    <p>Transformamos complexidade em clareza. Aprender não precisa ser intimidador.</p>
+                </div>
+                <div class="about-card" data-aos="fade-up" data-delay="100">
+                    <div class="icon-box"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Guardião do Seu Patrimônio</h3>
+                    <p>Simulação segura, análise profissional. Teste estratégias sem risco real.</p>
+                </div>
+                <div class="about-card" data-aos="fade-up" data-delay="200">
+                    <div class="icon-box"><i class="fas fa-chart-line"></i></div>
+                    <h3>Análise Avançada</h3>
+                    <p>Ferramentas de qualidade institucional acessíveis para todos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section" id="recursos">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">RECURSOS</span>
+                <h2>Tudo que você precisa em um só lugar</h2>
+            </div>
+            <div class="features-showcase">
+                <div class="feature-card floating" data-aos="slide-left">
+                    <div class="feature-visual">
+                        <i class="fas fa-chart-candlestick"></i>
+                    </div>
+                    <div class="feature-info">
+                        <h3>Trade Pro</h3>
+                        <p>Gráficos avançados, indicadores técnicos e análise em tempo real para suas decisões.</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i> Múltiplos timeframes</li>
+                            <li><i class="fas fa-check"></i> 6+ indicadores técnicos</li>
+                            <li><i class="fas fa-check"></i> Simulação realista</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="feature-card floating" data-aos="slide-right">
+                    <div class="feature-info">
+                        <h3>IA Advisor</h3>
+                        <p>Assistente inteligente que explica conceitos, interpreta movimentos e educa sobre o mercado.</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i> Respostas educacionais</li>
+                            <li><i class="fas fa-check"></i> Análise de contexto</li>
+                            <li><i class="fas fa-check"></i> Sem viés de recomendação</li>
+                        </ul>
+                    </div>
+                    <div class="feature-visual">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                </div>
+                <div class="feature-card floating" data-aos="slide-left">
+                    <div class="feature-visual">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="feature-info">
+                        <h3>Mercado Global</h3>
+                        <p>Acompanhe ações, criptos, commodities e mais em uma interface clara e moderna.</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i> 30+ ativos simulados</li>
+                            <li><i class="fas fa-check"></i> Dados em tempo real</li>
+                            <li><i class="fas fa-check"></i> Categorias organizadas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="social-section">
+        <div class="container">
+            <h2>Conecte-se conosco</h2>
+            <div class="social-links">
+                <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-btn"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="landing-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo-section">
+                        <div class="logo-icon"><i class="fas fa-cube"></i></div>
+                        <span class="logo-text">AlphaFlow</span>
+                    </div>
+                    <p>Plataforma de educação e análise financeira.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Plataforma</h4>
+                    <a href="dashboard.html">Acessar Dashboard</a>
+                    <a href="auth.html">Login / Cadastro</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <a href="legal.html">Normas e Regulamentos</a>
+                    <a href="legal.html#termos">Termos de Uso</a>
+                    <a href="legal.html#privacidade">Privacidade</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Suporte</h4>
+                    <a href="mailto:contato@alphaflow.com">Contato</a>
+                    <a href="#faq">FAQ</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AlphaFlow. Todos os direitos reservados.</p>
+                <p class="disclaimer">Esta plataforma não é uma corretora. Todas as operações são simuladas para fins educacionais.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/landing.js"></script>
+</body>
+</html>

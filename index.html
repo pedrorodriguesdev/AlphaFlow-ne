@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AlphaFlow Ultimate v8.0+ | Enhanced Trading Platform</title>
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <canvas id="bg-canvas"></canvas>
+
+    <div id="login-overlay" class="modal-overlay hidden">
+        <div class="modal-card auth-card">
+            <div class="brand-header">
+                <i class="fas fa-cube logo-icon"></i>
+                <h2>AlphaFlow</h2>
+            </div>
+            <p>Sua sessão expirou ou você precisa entrar.</p>
+            <div class="auth-forms">
+                <input type="text" id="auth-email" placeholder="E-mail (@gmail.com / @hotmail.com)" class="input-dark">
+                <input type="password" id="auth-pass" placeholder="Senha" class="input-dark">
+                <button class="btn btn-primary" onclick="Auth.login()">ENTRAR / CRIAR</button>
+            </div>
+            <small style="color:var(--text-muted); display:block; margin-top:10px;">Login cria conta automaticamente se não existir.</small>
+        </div>
+    </div>
+
+    <div id="app">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="logo-box"><i class="fas fa-cube"></i></div>
+                <span>AlphaFlow</span>
+            </div>
+            <nav class="nav-menu">
+                <div class="nav-item active" onclick="Router.go('dashboard')"><i class="fas fa-th-large"></i> <span>Dashboard</span></div>
+                <div class="nav-item" onclick="Router.go('trade-pro')"><i class="fas fa-chart-candlestick"></i> <span>Trade Pro</span></div>
+                <div class="nav-item" onclick="Router.go('market')"><i class="fas fa-globe"></i> <span>Mercado Global</span></div>
+                <div class="nav-item" onclick="Router.go('news')"><i class="fas fa-newspaper"></i> <span>Alpha News</span></div>
+                <div class="nav-item" onclick="Router.go('ai')"><i class="fas fa-robot"></i> <span>IA Advisor</span></div>
+                <div class="divider"></div>
+                <div class="nav-item" onclick="Router.go('settings')"><i class="fas fa-cog"></i> <span>Configurações</span></div>
+            </nav>
+            <div class="user-mini">
+                <div class="avatar"><i class="fas fa-user"></i></div>
+                <div class="info">
+                    <span id="sidebar-user">Visitante</span>
+                    <small id="sidebar-type">Iniciante</small>
+                </div>
+            </div>
+        </aside>
+
+        <main>
+            <header class="top-bar">
+                <div class="live-indicator"><span class="dot"></span> MERCADO AO VIVO</div>
+                <div class="wallet-pill">
+                    <i class="fas fa-wallet"></i>
+                    <span class="mono" id="header-balance">R$ 0,00</span>
+                </div>
+            </header>
+
+            <section id="view-dashboard" class="view active">
+                <h2>Visão Geral</h2>
+                <div class="kpi-grid">
+                    <div class="card kpi">
+                        <small>Patrimônio Total</small>
+                        <h3 class="mono" id="dash-equity">R$ 0,00</h3>
+                    </div>
+                    <div class="card kpi">
+                        <small>Disponível</small>
+                        <h3 class="mono text-brand" id="dash-cash">R$ 0,00</h3>
+                    </div>
+                    <div class="card kpi">
+                        <small>Lucro/Prejuízo</small>
+                        <h3 class="mono" id="dash-pnl">R$ 0,00</h3>
+                    </div>
+                    <div class="card kpi">
+                        <small>Posições Abertas</small>
+                        <h3 class="mono" id="dash-positions">0</h3>
+                    </div>
+                </div>
+                <div class="charts-grid">
+                    <div class="card">
+                        <h4>Evolução Patrimonial</h4>
+                        <div class="chart-box"><canvas id="chart-evolution"></canvas></div>
+                    </div>
+                    <div class="card">
+                        <h4>Alocação de Ativos</h4>
+                        <div class="chart-box"><canvas id="chart-allocation"></canvas></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="view-market" class="view">
+                <h2>Mercado Global</h2>
+                <div class="filters">
+                    <input type="text" placeholder="Buscar ativo..." class="input-dark" onkeyup="Market.filter(this.value)">
+                </div>
+                <div class="market-grid" id="market-list">
+                </div>
+            </section>
+
+            <section id="view-trade-pro" class="view">
+                <div class="trade-layout">
+                    <div class="chart-area card">
+                        <div class="chart-header">
+                            <select id="pro-asset-select" onchange="TradePro.changeAsset(this.value)" class="input-dark"></select>
+                            <div class="chart-types">
+                                <button class="tf-btn active" onclick="TradePro.setChartType('candlestick')">Vela</button>
+                                <button class="tf-btn" onclick="TradePro.setChartType('line')">Linha</button>
+                                <button class="tf-btn" onclick="TradePro.setChartType('area')">Área</button>
+                            </div>
+                            <div class="timeframes">
+                                <button class="tf-btn active" onclick="TradePro.setTF('1m')">1m</button>
+                                <button class="tf-btn" onclick="TradePro.setTF('5m')">5m</button>
+                                <button class="tf-btn" onclick="TradePro.setTF('1h')">1h</button>
+                                <button class="tf-btn" onclick="TradePro.setTF('4h')">4h</button>
+                                <button class="tf-btn" onclick="TradePro.setTF('1d')">1D</button>
+                            </div>
+                            <div class="indicators">
+                                <label><input type="checkbox" onchange="TradePro.toggleInd('sma')"> SMA</label>
+                                <label><input type="checkbox" onchange="TradePro.toggleInd('ema')"> EMA</label>
+                                <label><input type="checkbox" onchange="TradePro.toggleInd('rsi')"> RSI</label>
+                                <label><input type="checkbox" onchange="TradePro.toggleInd('macd')"> MACD</label>
+                                <label><input type="checkbox" onchange="TradePro.toggleInd('bb')"> BB</label>
+                                <label><input type="checkbox" onchange="TradePro.toggleInd('vol')"> Vol</label>
+                            </div>
+                        </div>
+                        <div id="pro-chart-container"></div>
+                    </div>
+                    <div class="order-panel card">
+                        <h3>Ordem</h3>
+                        <div class="order-info">
+                            <span>Preço</span> <span class="mono" id="pro-price">---</span>
+                        </div>
+                        <div class="order-info">
+                            <span>Carteira</span> <span class="mono" id="pro-wallet">---</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Quantidade</label>
+                            <input type="number" id="pro-qty" value="1" min="0.1" step="0.1" class="input-dark">
+                        </div>
+                        <div class="total-calc">
+                            Total: <span id="pro-total" class="mono">R$ 0,00</span>
+                        </div>
+                        <div class="actions">
+                            <button class="btn btn-buy" onclick="Trade.execute('buy')">COMPRAR</button>
+                            <button class="btn btn-sell" onclick="Trade.execute('sell')">VENDER</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="view-news" class="view">
+                <h2>Alpha News Wire</h2>
+                <div class="filters">
+                    <button class="btn-filter active" onclick="News.filter('all')">Todos</button>
+                    <button class="btn-filter" onclick="News.filter('Cripto')">Cripto</button>
+                    <button class="btn-filter" onclick="News.filter('Ações')">Ações</button>
+                    <button class="btn-filter" onclick="News.filter('Commodities')">Commodities</button>
+                </div>
+                <div class="news-list" id="news-container">
+                </div>
+            </section>
+
+            <section id="view-ai" class="view">
+                <div class="ai-container card">
+                    <div class="ai-header">
+                        <i class="fas fa-brain text-brand"></i> IA Advisor v2.0
+                        <button class="btn btn-sm" onclick="AI.showFAQ()">Perguntas que respondo</button>
+                    </div>
+                    <div class="chat-feed" id="chat-feed">
+                        <div class="msg bot">Olá! Sou seu assistente financeiro avançado. Posso analisar o mercado, explicar conceitos ou ajudar com seus investimentos. O que deseja saber?</div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="chat-input" placeholder="Digite sua dúvida..." class="input-dark" onkeypress="if(event.key==='Enter') AI.send()">
+                        <button class="btn btn-primary" onclick="AI.send()"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="view-settings" class="view">
+                <h2>Configurações</h2>
+                <div class="grid-2">
+                    <div class="card">
+                        <h3>Conta</h3>
+                        <div class="account-info">
+                            <label>Nome</label>
+                            <div class="info-display" id="account-name-display">---</div>
+                            
+                            <label>Email</label>
+                            <div class="info-display" id="account-email-display">---</div>
+                            
+                            <label>Perfil de Risco</label>
+                            <select id="set-type" class="input-dark">
+                                <option value="Iniciante">Iniciante</option>
+                                <option value="Conservador">Conservador</option>
+                                <option value="Moderado">Moderado</option>
+                                <option value="Agressivo">Agressivo</option>
+                                <option value="Trader">Trader</option>
+                            </select>
+                        </div>
+                        
+                        <hr class="divider">
+                        
+                        <h4>Alterar Senha</h4>
+                        <div class="password-change-form">
+                            <div class="input-group">
+                                <label>Senha Atual</label>
+                                <input type="password" id="current-password" class="input-dark" placeholder="Digite sua senha atual">
+                            </div>
+                            <div class="input-group">
+                                <label>Nova Senha</label>
+                                <input type="password" id="new-password" class="input-dark" placeholder="Mínimo 6 caracteres">
+                            </div>
+                            <div class="input-group">
+                                <label>Confirmar Nova Senha</label>
+                                <input type="password" id="confirm-new-password" class="input-dark" placeholder="Digite novamente">
+                            </div>
+                            <button class="btn btn-primary w-100" onclick="Settings.changePassword()">Alterar Senha</button>
+                        </div>
+                        
+                        <hr class="divider">
+                        
+                        <button class="btn btn-primary w-100" onclick="Settings.saveProfile()">Salvar Perfil</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Banco Alpha</h3>
+                        <p class="text-muted">Adicione saldo simulado à sua conta. Limite: 3x por dia.</p>
+                        <div class="balance-box">
+                            <h1 class="mono text-up">+ R$ 10.000,00</h1>
+                            <button class="btn btn-buy w-100" onclick="Settings.addFunds()">RESGATAR AGORA</button>
+                            <small class="mt-10 block" id="refill-counter">Restam 3 usos hoje.</small>
+                        </div>
+                        
+                        <hr class="divider">
+                        
+                        <h3>Sessão</h3>
+                        <button class="btn btn-secondary w-100" onclick="Settings.logout()">
+                            <i class="fas fa-sign-out-alt"></i> Sair da Conta
+                        </button>
+                        
+                        <hr class="divider">
+                        
+                        <h3>Normas e Leis</h3>
+                        <p class="text-muted">Conheça os regulamentos, políticas de privacidade e compliance da plataforma.</p>
+                        <a href="legal.html" target="_blank" class="btn btn-secondary w-100">
+                            <i class="fas fa-gavel"></i> Acessar Página de Compliance
+                        </a>
+                        
+                        <hr class="divider">
+                        
+                        <div class="config-toggles">
+                            <h3>Preferências</h3>
+                            <label class="toggle-row">
+                                <span>Partículas de Fundo</span>
+                                <input type="checkbox" id="toggle-particles" checked onchange="App.toggleBg(this.checked)">
+                            </label>
+                            <label class="toggle-row">
+                                <span>Notificações</span>
+                                <input type="checkbox" id="toggle-notifications" checked onchange="Settings.toggleNotifications(this.checked)">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="modal-invest" class="modal-overlay hidden">
+        <div class="modal-card invest-card">
+            <div class="modal-header">
+                <h3 id="m-asset-name">Bitcoin (BTC)</h3>
+                <button class="close-btn" onclick="UI.closeModal('modal-invest')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="modal-chart-container" style="height: 250px;"></div>
+                <div class="trade-controls">
+                    <div class="price-display">
+                        <span class="mono big" id="m-price">---</span>
+                        <span class="badge" id="m-var">0%</span>
+                    </div>
+                    <div class="wallet-display">Saldo: <span class="mono" id="m-wallet">---</span></div>
+                    <div class="input-row">
+                        <button class="btn-qty" onclick="Trade.adjQty(-1)">-</button>
+                        <input type="number" id="m-qty" value="1" class="input-dark text-center">
+                        <button class="btn-qty" onclick="Trade.adjQty(1)">+</button>
+                    </div>
+                    <div class="action-row">
+                        <button class="btn btn-buy" onclick="Trade.execute('buy', true)">COMPRAR</button>
+                        <button class="btn btn-sell" onclick="Trade.execute('sell', true)">VENDER</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-news" class="modal-overlay hidden">
+        <div class="modal-card news-card">
+            <div class="modal-header">
+                <span class="badge" id="n-cat">Categoria</span>
+                <button class="close-btn" onclick="UI.closeModal('modal-news')">&times;</button>
+            </div>
+            <h2 id="n-title">Título</h2>
+            <div id="n-body" class="news-body-content"></div>
+        </div>
+    </div>
+
+    <div id="modal-faq" class="modal-overlay hidden">
+        <div class="modal-card faq-card">
+            <div class="modal-header">
+                <h3 style="flex:1">Perguntas Frequentes (IA Advisor)</h3>
+                <button class="close-btn" onclick="UI.closeModal('modal-faq')">&times;</button>
+            </div>
+            <div id="faq-list" class="faq-list"></div>
+            <button class="btn btn-primary mt-20 w-100" onclick="UI.closeModal('modal-faq')">Fechar</button>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+    <script src="db/alphaDB.js"></script>
+    <script src="security/inputValidator.js"></script>
+    <script src="security/authManager.js"></script>
+    <script src="services/freemiumManager.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

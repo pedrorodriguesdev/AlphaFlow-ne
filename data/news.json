@@ -1,0 +1,242 @@
+[
+  {
+    "title": "Bitcoin atinge novo recorde histórico",
+    "summary": "A maior criptomoeda alcançou R$ 350.000",
+    "body": "Bitcoin alcançou seu maior valor desde sua criação. Analistas indicam que o ciclo de alta deve continuar até 2025. O aumento foi impulsionado pela aprovação de ETFs de Bitcoin nos EUA e pela redução das taxas de juros.",
+    "category": "Cripto",
+    "assets": ["BTC"],
+    "date": "2025-12-15"
+  },
+  {
+    "title": "Ethereum 2.0: Upgrade revolucionário",
+    "summary": "Ethereum recebe major upgrade",
+    "body": "O Ethereum 2.0 foi implementado com sucesso, trazendo melhorias significativas em escalabilidade. A transição para Proof of Stake reduz o consumo de energia em 99,95%. Desenvolvedores esperam aumento na adoção.",
+    "category": "Cripto",
+    "assets": ["ETH"],
+    "date": "2025-12-14"
+  },
+  {
+    "title": "Nvidia ultrapassa Microsoft em capitalização",
+    "summary": "NVDA se torna empresa mais valiosa do mundo",
+    "body": "Nvidia superou Microsoft como a empresa mais valiosa do mercado, impulsionada pela demanda crescente de chips de IA. Analistas projetam continuidade do crescimento.",
+    "category": "Ações",
+    "assets": ["NVDA", "MSFT"],
+    "date": "2025-12-13"
+  },
+  {
+    "title": "Tesla anuncia novo modelo Roadster",
+    "summary": "Veículo elétrico mais rápido do mundo",
+    "body": "Tesla revelou o novo Roadster com aceleração 0-100 em 1.9 segundos. O veículo começará a ser entregue em 2026 com preço inicial de $200 mil.",
+    "category": "Ações",
+    "assets": ["TSLA"],
+    "date": "2025-12-12"
+  },
+  {
+    "title": "FED mantém taxa de juros em 4.5%",
+    "summary": "Banco Central dos EUA segura política monetária",
+    "body": "O Federal Reserve decidiu manter a taxa SELIC em 4.5% ao ano. Essa decisão reflete a inflação controlada e perspectivas positivas para 2026.",
+    "category": "Commodities",
+    "assets": ["SPX", "NASDAQ"],
+    "date": "2025-12-11"
+  },
+  {
+    "title": "Ouro sobe com demanda de hedge",
+    "summary": "Preço do ouro bate recordes",
+    "body": "O ouro atingiu R$ 12.500 por onça devido à incerteza geopolítica. Investidores buscam proteção contra inflação e volatilidade dos mercados.",
+    "category": "Commodities",
+    "assets": ["XAU"],
+    "date": "2025-12-10"
+  },
+  {
+    "title": "Petróleo WTI recua com perspectiva de produção",
+    "summary": "Barril cai para $75 por expectativa de oferta",
+    "body": "O petróleo WTI recuou 5% com notícias de aumento de produção nos EUA. Analistas veem consolidação dos preços no próximo trimestre.",
+    "category": "Commodities",
+    "assets": ["WTI"],
+    "date": "2025-12-09"
+  },
+  {
+    "title": "Ibovespa bate recorde de 130 mil pontos",
+    "summary": "Bolsa brasileira fecha em alta histórica",
+    "body": "O Ibovespa superou 130 mil pontos em sessão de forte demanda por ativos brasileiros. Investidores estrangeiros voltam a investir no Brasil.",
+    "category": "Índices",
+    "assets": ["IBOV"],
+    "date": "2025-12-08"
+  },
+  {
+    "title": "Amazon investe em data centers de IA",
+    "summary": "AMZN anuncia R$ 150 bilhões em infraestrutura",
+    "body": "Amazon anunciou investimento massivo em data centers para IA. A empresa planeja expandir sua presença no mercado de computação em nuvem.",
+    "category": "Ações",
+    "assets": ["AMZN"],
+    "date": "2025-12-07"
+  },
+  {
+    "title": "Meta ultrapassa 3 bilhões de usuários",
+    "summary": "Facebook, Instagram e WhatsApp conectam 3B pessoas",
+    "body": "Meta atingiu 3 bilhões de usuários ativos mensais combinados. A receita de publicidade cresceu 40% no último trimestre.",
+    "category": "Ações",
+    "assets": ["META"],
+    "date": "2025-12-06"
+  },
+  {
+    "title": "Netflix lança novo plano com IA",
+    "summary": "Recomendações personalizadas por inteligência artificial",
+    "body": "Netflix implementou novo algoritmo de IA que personaliza recomendações em tempo real. Assinantes reportam 30% mais satisfação.",
+    "category": "Ações",
+    "assets": ["NFLX"],
+    "date": "2025-12-05"
+  },
+  {
+    "title": "Solana atinge 100 mil transações por segundo",
+    "summary": "Blockchain mais rápido do mercado",
+    "body": "Solana atingiu velocidade recorde de 100 mil TPS com novo upgrade. A rede agora compete com sistemas de pagamento tradicionais.",
+    "category": "Cripto",
+    "assets": ["SOL"],
+    "date": "2025-12-04"
+  },
+  {
+    "title": "Cardano recebe aprovação para contratos inteligentes avançados",
+    "summary": "ADA habilita novo padrão de smart contracts",
+    "body": "Cardano implementou suporte para contratos inteligentes mais complexos. Desenvolvedores agora podem criar aplicações DeFi mais sofisticadas.",
+    "category": "Cripto",
+    "assets": ["ADA"],
+    "date": "2025-12-03"
+  },
+  {
+    "title": "Dogecoin alcança R$ 0,42 com apoio de influenciadores",
+    "summary": "DOGE sobe 150% em um mês",
+    "body": "Dogecoin experimentou rally especulativo com suporte de celebridades. Analistas advertem sobre alta volatilidade.",
+    "category": "Cripto",
+    "assets": ["DOGE"],
+    "date": "2025-12-02"
+  },
+  {
+    "title": "XRP se recupera após clareza regulatória",
+    "summary": "Ripple XRP sobe com decisões favoráveis",
+    "body": "XRP subiu 80% após decisão judicial favorável sobre sua regulação. A Ripple pode agora expandir serviços de pagamento internacional.",
+    "category": "Cripto",
+    "assets": ["XRP"],
+    "date": "2025-12-01"
+  },
+  {
+    "title": "Intel anuncia novo processador Raptor Lake",
+    "summary": "INTC lança chips de 12ª geração",
+    "body": "Intel revelou sua nova linha de processadores Raptor Lake com 40% mais desempenho. A empresa visa recuperar liderança no mercado de CPUs.",
+    "category": "Ações",
+    "assets": ["INTC"],
+    "date": "2025-11-30"
+  },
+  {
+    "title": "AMD adquire empresa de IA por $5 bilhões",
+    "summary": "Expansão estratégica em tecnologia",
+    "body": "AMD anunciou aquisição de startup de IA por $5 bilhões. A transação reforça posição da empresa no segmento acelerador de IA.",
+    "category": "Ações",
+    "assets": ["AMD"],
+    "date": "2025-11-29"
+  },
+  {
+    "title": "Petrobras anuncia produção recorde de petróleo",
+    "summary": "PETR4 sobe com novo recorde de barris",
+    "body": "Petrobras atingiu produção recorde de 3 milhões de barris por dia. Receita da empresa cresceu 25% com altos preços de petróleo.",
+    "category": "Ações",
+    "assets": ["PETR4"],
+    "date": "2025-11-28"
+  },
+  {
+    "title": "Vale investe em mineração verde",
+    "summary": "VALE3 aposta em sustentabilidade",
+    "body": "Vale anunciou R$ 50 bilhões em investimentos em mineração com tecnologia verde. A empresa busca reduzir emissões de carbono em 60% até 2030.",
+    "category": "Ações",
+    "assets": ["VALE3"],
+    "date": "2025-11-27"
+  },
+  {
+    "title": "Itaú Unibanco abre novo hub de inovação",
+    "summary": "ITUB4 investe em fintech",
+    "body": "Itaú Unibanco lançou hub de inovação financeira com foco em blockchain. Banco investirá R$ 1 bilhão em startups de tecnologia.",
+    "category": "Ações",
+    "assets": ["ITUB4"],
+    "date": "2025-11-26"
+  },
+  {
+    "title": "Euro fecha em alta contra o real",
+    "summary": "EUR/USD atinge 5,50",
+    "body": "Euro apreciou 2,5% contra o real. Mercado reage a sinais de manutenção de taxas altas no Banco Central Europeu.",
+    "category": "Forex",
+    "assets": ["EURUSD"],
+    "date": "2025-11-25"
+  },
+  {
+    "title": "FIIs de logística fecham em alta com recuperação",
+    "summary": "Fundos Imobiliários subem 8%",
+    "body": "FIIs de logística (HGLG11) atingiram novo máximo após recuperação do e-commerce. Rendimentos atraem investidores.",
+    "category": "FIIs",
+    "assets": ["HGLG11"],
+    "date": "2025-11-24"
+  },
+  {
+    "title": "Mercado aguarda decisão de BCE sobre taxa de juros",
+    "summary": "Investidores monitoram política monetária europeia",
+    "body": "Banco Central Europeu se reúne na próxima semana para decisão sobre juros. Mercado precifica corte de 0,5% nas taxas.",
+    "category": "Índices",
+    "assets": ["EURUSD"],
+    "date": "2025-11-23"
+  },
+  {
+    "title": "Bitcoin recebe aprovação de ETF global",
+    "summary": "Produto oferece exposição fácil",
+    "body": "ETF de Bitcoin aprovado em 15 países simultâneamente. Instituições podem agora investir em Bitcoin com regulação clara.",
+    "category": "Cripto",
+    "assets": ["BTC"],
+    "date": "2025-11-22"
+  },
+  {
+    "title": "Ethereum DeFi ultrapassa $1 trilhão em TVL",
+    "summary": "Valor total trancado cresce 500%",
+    "body": "O ecossistema DeFi do Ethereum alcançou $1 trilhão em valor total trancado. Crescimento impulsionado por novos protocolos e adoção institucional.",
+    "category": "Cripto",
+    "assets": ["ETH"],
+    "date": "2025-11-21"
+  },
+  {
+    "title": "Google Cloud anuncia parcerias com exchanges cripto",
+    "summary": "GOOGL busca fatia do mercado blockchain",
+    "body": "Google Cloud assinou contratos com 5 exchanges de criptomoedas para infraestrutura. Divisão busca captar mercado de blockchain.",
+    "category": "Ações",
+    "assets": ["GOOGL"],
+    "date": "2025-11-20"
+  },
+  {
+    "title": "Microsoft Copilot bate recordes de uso",
+    "summary": "MSFT reporta 100 milhões de usuários ativos",
+    "body": "Microsoft Copilot atingiu 100 milhões de usuários ativos mensais. Ferramenta de IA oferece grande potencial de monetização.",
+    "category": "Ações",
+    "assets": ["MSFT"],
+    "date": "2025-11-19"
+  },
+  {
+    "title": "Apple lança iPhone 16 Ultra com IA avançada",
+    "summary": "AAPL apresenta nova geração de smartphones",
+    "body": "Apple revelou iPhone 16 Ultra com processador A20 e IA integrada. Pré-vendas ultrapassam 2 milhões em 24 horas.",
+    "category": "Ações",
+    "assets": ["AAPL"],
+    "date": "2025-11-18"
+  },
+  {
+    "title": "Shopify simplifica plataforma para PMEs",
+    "summary": "SHOP democratiza e-commerce",
+    "body": "Shopify lançou novo plano com 50% menos custos para pequenas lojas. Expectativa é adicionar 1 milhão de comerciantes.",
+    "category": "Ações",
+    "assets": ["SHOP"],
+    "date": "2025-11-17"
+  },
+  {
+    "title": "Banco do Brasil anuncia recapitalização de R$ 30 bi",
+    "summary": "BBAS3 fortalece capital",
+    "body": "BB anunciou injeção de capital de R$ 30 bilhões. Banco busca se fortalecer para cenário econômico mais desafiador.",
+    "category": "Ações",
+    "assets": ["BBAS3"],
+    "date": "2025-11-16"
+  }
+]

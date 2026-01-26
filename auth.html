@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autenticação | AlphaFlow</title>
+    <link rel="stylesheet" href="styles/auth.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas id="particles-canvas"></canvas>
+    
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="logo-section">
+                <div class="logo-icon"><i class="fas fa-cube"></i></div>
+                <h1>AlphaFlow</h1>
+            </div>
+            
+            <div class="tabs">
+                <button class="tab-btn active" onclick="AuthPage.switchTab('login')">Entrar</button>
+                <button class="tab-btn" onclick="AuthPage.switchTab('signup')">Criar Conta</button>
+            </div>
+
+            <form id="login-form" class="auth-form active">
+                <h2>Bem-vindo de volta</h2>
+                <p class="form-subtitle">Entre com suas credenciais</p>
+                
+                <div class="input-group">
+                    <label>Email ou Nome</label>
+                    <input type="text" id="login-identifier" placeholder="seu@email.com ou usuário" required>
+                </div>
+                
+                <div class="input-group">
+                    <label>Senha</label>
+                    <input type="password" id="login-password" placeholder="••••••••" required>
+                </div>
+                
+                <div class="form-check">
+                    <input type="checkbox" id="human-check" required>
+                    <label for="human-check">Não sou um robô</label>
+                </div>
+                
+                <button type="submit" class="btn-primary">Entrar <i class="fas fa-arrow-right"></i></button>
+            </form>
+
+            <form id="signup-form" class="auth-form">
+                <h2>Crie sua conta</h2>
+                <p class="form-subtitle">Comece sua jornada hoje</p>
+                
+                <div class="input-group">
+                    <label>Nome Completo</label>
+                    <input type="text" id="signup-name" placeholder="João Silva" required>
+                    <small>Apenas letras e espaços</small>
+                </div>
+                
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" id="signup-email" placeholder="seu@email.com" required>
+                    <small>Use @gmail, @hotmail, @outlook ou @yahoo</small>
+                </div>
+                
+                <div class="input-group">
+                    <label>Senha</label>
+                    <input type="password" id="signup-password" placeholder="••••••••" required>
+                    <small>Mínimo 6 caracteres</small>
+                </div>
+                
+                <div class="input-group">
+                    <label>Confirmar Senha</label>
+                    <input type="password" id="signup-password-confirm" placeholder="••••••••" required>
+                </div>
+                
+                <div class="form-check">
+                    <input type="checkbox" id="notifications-opt" checked>
+                    <label for="notifications-opt">Desejo receber notificações e atualizações</label>
+                </div>
+                
+                <div class="form-check">
+                    <input type="checkbox" id="terms-check" required>
+                    <label for="terms-check">Aceito os <a href="legal.html#termos">Termos de Uso</a></label>
+                </div>
+                
+                <button type="submit" class="btn-primary">Criar Conta <i class="fas fa-arrow-right"></i></button>
+            </form>
+            
+            <div class="auth-footer">
+                <a href="landing.html" class="back-link"><i class="fas fa-arrow-left"></i> Voltar ao início</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script src="db/alphaDB.js"></script>
+    <script src="security/inputValidator.js"></script>
+    <script src="security/authManager.js"></script>
+    <script src="scripts/auth.js"></script>
+</body>
+</html>

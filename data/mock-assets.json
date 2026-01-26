@@ -1,0 +1,170 @@
+[
+  { "id": "btc", "ticker": "BTC", "name": "Bitcoin", "category": "Cripto", "basePrice": 350000, "volatility": 0.05 },
+  { "id": "eth", "ticker": "ETH", "name": "Ethereum", "category": "Cripto", "basePrice": 18500, "volatility": 0.04 },
+  { "id": "sol", "ticker": "SOL", "name": "Solana", "category": "Cripto", "basePrice": 750, "volatility": 0.06 },
+  {
+    "id": "bnb",
+    "ticker": "BNB",
+    "name": "Binance Coin",
+    "category": "Cripto",
+    "basePrice": 2100,
+    "volatility": 0.045
+  },
+  { "id": "xrp", "ticker": "XRP", "name": "Ripple", "category": "Cripto", "basePrice": 3.5, "volatility": 0.055 },
+  { "id": "ada", "ticker": "ADA", "name": "Cardano", "category": "Cripto", "basePrice": 1.25, "volatility": 0.05 },
+  { "id": "doge", "ticker": "DOGE", "name": "Dogecoin", "category": "Cripto", "basePrice": 0.42, "volatility": 0.07 },
+  {
+    "id": "aapl",
+    "ticker": "AAPL",
+    "name": "Apple Inc.",
+    "category": "Ações US",
+    "basePrice": 890,
+    "volatility": 0.015
+  },
+  {
+    "id": "nvda",
+    "ticker": "NVDA",
+    "name": "Nvidia Corp",
+    "category": "Ações US",
+    "basePrice": 4600,
+    "volatility": 0.025
+  },
+  {
+    "id": "tsla",
+    "ticker": "TSLA",
+    "name": "Tesla Inc",
+    "category": "Ações US",
+    "basePrice": 1200,
+    "volatility": 0.03
+  },
+  {
+    "id": "msft",
+    "ticker": "MSFT",
+    "name": "Microsoft",
+    "category": "Ações US",
+    "basePrice": 1800,
+    "volatility": 0.01
+  },
+  { "id": "amzn", "ticker": "AMZN", "name": "Amazon", "category": "Ações US", "basePrice": 750, "volatility": 0.02 },
+  {
+    "id": "googl",
+    "ticker": "GOOGL",
+    "name": "Alphabet",
+    "category": "Ações US",
+    "basePrice": 800,
+    "volatility": 0.018
+  },
+  {
+    "id": "meta",
+    "ticker": "META",
+    "name": "Meta Platforms",
+    "category": "Ações US",
+    "basePrice": 1500,
+    "volatility": 0.025
+  },
+  { "id": "nflx", "ticker": "NFLX", "name": "Netflix", "category": "Ações US", "basePrice": 2200, "volatility": 0.03 },
+  {
+    "id": "amd",
+    "ticker": "AMD",
+    "name": "Adv. Micro Dev.",
+    "category": "Ações US",
+    "basePrice": 600,
+    "volatility": 0.035
+  },
+  { "id": "intc", "ticker": "INTC", "name": "Intel", "category": "Ações US", "basePrice": 180, "volatility": 0.02 },
+  { "id": "shop", "ticker": "SHOP", "name": "Shopify", "category": "Ações US", "basePrice": 350, "volatility": 0.04 },
+  {
+    "id": "petr4",
+    "ticker": "PETR4",
+    "name": "Petrobras",
+    "category": "Ações BR",
+    "basePrice": 38.5,
+    "volatility": 0.02
+  },
+  { "id": "vale3", "ticker": "VALE3", "name": "Vale", "category": "Ações BR", "basePrice": 62.4, "volatility": 0.02 },
+  {
+    "id": "itub4",
+    "ticker": "ITUB4",
+    "name": "Itaú Unibanco",
+    "category": "Ações BR",
+    "basePrice": 32.1,
+    "volatility": 0.015
+  },
+  {
+    "id": "bbas3",
+    "ticker": "BBAS3",
+    "name": "Banco do Brasil",
+    "category": "Ações BR",
+    "basePrice": 55.2,
+    "volatility": 0.018
+  },
+  { "id": "weg3", "ticker": "WEGE3", "name": "WEG", "category": "Ações BR", "basePrice": 40.0, "volatility": 0.015 },
+  { "id": "mglu3", "ticker": "MGLU3", "name": "Magalu", "category": "Ações BR", "basePrice": 2.5, "volatility": 0.05 },
+  {
+    "id": "gold",
+    "ticker": "XAU",
+    "name": "Ouro Spot",
+    "category": "Commodity",
+    "basePrice": 12000,
+    "volatility": 0.005
+  },
+  {
+    "id": "oil",
+    "ticker": "WTI",
+    "name": "Petróleo WTI",
+    "category": "Commodity",
+    "basePrice": 400,
+    "volatility": 0.02
+  },
+  {
+    "id": "gas",
+    "ticker": "NG",
+    "name": "Gás Natural",
+    "category": "Commodity",
+    "basePrice": 150,
+    "volatility": 0.025
+  },
+  { "id": "corn", "ticker": "ZC", "name": "Milho", "category": "Commodity", "basePrice": 850, "volatility": 0.02 },
+  { "id": "sp500", "ticker": "SPX", "name": "S&P 500", "category": "Índice", "basePrice": 25000, "volatility": 0.008 },
+  {
+    "id": "nasdaq",
+    "ticker": "NDX",
+    "name": "Nasdaq 100",
+    "category": "Índice",
+    "basePrice": 85000,
+    "volatility": 0.012
+  },
+  { "id": "ibov", "ticker": "IBOV", "name": "Ibovespa", "category": "Índice", "basePrice": 130000, "volatility": 0.01 },
+  {
+    "id": "eurusd",
+    "ticker": "EUR/USD",
+    "name": "Euro Dólar",
+    "category": "Forex",
+    "basePrice": 5.4,
+    "volatility": 0.003
+  },
+  {
+    "id": "gbpusd",
+    "ticker": "GBP/USD",
+    "name": "Libra Dólar",
+    "category": "Forex",
+    "basePrice": 6.2,
+    "volatility": 0.003
+  },
+  {
+    "id": "hglg11",
+    "ticker": "HGLG11",
+    "name": "CSHG Logística",
+    "category": "FIIs",
+    "basePrice": 162.0,
+    "volatility": 0.002
+  },
+  {
+    "id": "knri11",
+    "ticker": "KNRI11",
+    "name": "Kinea Renda",
+    "category": "FIIs",
+    "basePrice": 158.5,
+    "volatility": 0.002
+  }
+]
