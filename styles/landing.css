@@ -322,6 +322,26 @@ body {
   color: var(--primary);
 }
 
+.feature-visual.feature-image {
+  font-size: unset;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 242, 255, 0.2);
+}
+
+.feature-visual.feature-image img {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover .feature-visual.feature-image img {
+  transform: scale(1.05);
+}
+
 .feature-info h3 {
   font-size: 2rem;
   margin-bottom: 15px;

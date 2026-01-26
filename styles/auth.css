@@ -25,7 +25,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 40px 0;
 }
 
 #particles-canvas {
@@ -42,6 +44,7 @@ body {
   width: 100%;
   max-width: 480px;
   padding: 20px;
+  margin: auto;
 }
 
 .auth-box {
