@@ -161,9 +161,9 @@ const AuthPage = {
       return
     }
 
-    // Validacao de email - obrigatorio @gmail.com
-    if (!emailRaw.endsWith("@gmail.com")) {
-      this.showToast("Email deve terminar com @gmail.com", "error")
+    // Validacao de email - provedores permitidos
+    if (!this.InputValidator.validateEmail(emailRaw) || !this.InputValidator.validateEmailProvider(emailRaw)) {
+      this.showToast("Use um email válido (@gmail, @hotmail, @outlook ou @yahoo)", "error")
       return
     }
 

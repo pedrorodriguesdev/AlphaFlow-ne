@@ -19,8 +19,9 @@ class InputValidator {
   }
 
   static validateEmailProvider(email) {
-    const allowedProviders = ["gmail.com", "hotmail.com", "outlook.com", "yahoo.com"]
-    const domain = email.split("@")[1]
+    if (typeof email !== "string" || !email.includes("@")) return false
+    const allowedProviders = ["gmail.com", "hotmail.com", "outlook.com", "yahoo.com", "gmail.com.br", "hotmail.com.br", "outlook.com.br", "yahoo.com.br"]
+    const domain = email.split("@")[1].toLowerCase()
     return allowedProviders.includes(domain)
   }
 

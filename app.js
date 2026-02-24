@@ -120,7 +120,11 @@ const FreemiumManager = window.FreemiumManager || {
 }
 
 // Declare the LightweightCharts variable before using it
-const LightweightCharts = window.LightweightsCharts
+const LightweightCharts = window.LightweightCharts
+
+function canUseLightweightCharts() {
+  return Boolean(LightweightCharts && typeof LightweightCharts.createChart === "function")
+}
 
 // --- DATA & CONFIG ---
 const Store = {
@@ -500,7 +504,7 @@ const Charts = {
 
     // Lightweight Charts for Trade Pro
     const proContainer = document.getElementById("pro-chart-container")
-    if (proContainer) {
+    if (proContainer && canUseLightweightCharts()) {
       Store.charts.pro = LightweightCharts.createChart(proContainer, {
         layout: { background: { color: "transparent" }, textColor: "#8a9ab8" },
         grid: { vertLines: { color: "rgba(255, 255, 255, 0.05)" }, horzLines: { color: "rgba(255, 255, 255, 0.05)" } },
@@ -512,6 +516,8 @@ const Charts = {
         borderVisible: false,
         wickVisible: true,
       })
+    } else if (proContainer) {
+      console.warn("[v0] LightweightCharts indisponível. Trade Pro sem gráfico avançado.")
     }
   },
 }
@@ -636,6 +642,11 @@ const TradePro = {
     const container = document.getElementById("pro-chart-container")
     if (!container) {
       console.log("[v0] Chart container not found!")
+      return
+    }
+
+    if (!canUseLightweightCharts()) {
+      Toast.show("Biblioteca de gráfico indisponível. Recarregue a página.", "warning")
       return
     }
 
@@ -902,9 +913,13 @@ const UI = {
 
     setTimeout(() => {
       const container = document.getElementById("modal-chart-container")
+      if (!container) return // Exit if container is not found
       container.innerHTML = "" // Clear previous chart if any
 
-      if (!container) return // Exit if container is not found
+      if (!canUseLightweightCharts()) {
+        console.warn("[v0] LightweightCharts indisponível no modal de ativo")
+        return
+      }
 
       Store.charts.modal = LightweightCharts.createChart(container, {
         width: container.clientWidth,
@@ -1038,7 +1053,7 @@ const Settings = {
       const currentPasswordHash = await AuthManager.hashPassword(currentPassword)
       // Assuming AlphaDB is correctly defined or mocked globally
       // If not, this would need a fallback similar to other dependencies.
-      const user = await (window.AlphaDB ? new AlphaDB() : AlphaDB).getUser(Store.user.email)
+      const user = await appDB.getUser(Store.user.email)
 
       if (!user || user.password !== currentPasswordHash) {
         Toast.show("Senha atual incorreta!", "error")
@@ -1049,7 +1064,7 @@ const Settings = {
       const newPasswordHash = await AuthManager.hashPassword(newPassword)
       user.password = newPasswordHash
       // Assuming AlphaDB is correctly defined or mocked globally
-      await (window.AlphaDB ? new AlphaDB() : AlphaDB).saveUser(user)
+      await appDB.saveUser(user)
 
       // Limpar campos
       document.getElementById("current-password").value = ""

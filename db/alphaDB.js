@@ -53,46 +53,79 @@ class AlphaDB {
     })
   }
 
+  _ensureDB() {
+    if (!this.db) {
+      throw new Error("AlphaDB not initialized. Call init() before using the database.")
+    }
+  }
+
+  _requestToPromise(request) {
+    return new Promise((resolve, reject) => {
+      request.onsuccess = () => resolve(request.result)
+      request.onerror = () => reject(request.error)
+    })
+  }
+
+  _transactionDone(transaction) {
+    return new Promise((resolve, reject) => {
+      transaction.oncomplete = () => resolve()
+      transaction.onerror = () => reject(transaction.error)
+      transaction.onabort = () => reject(transaction.error || new Error("IndexedDB transaction aborted"))
+    })
+  }
+
   async saveUser(userData) {
+    this._ensureDB()
     const transaction = this.db.transaction(["users"], "readwrite")
     const store = transaction.objectStore("users")
-    return store.put({ ...userData, updatedAt: new Date().toISOString() })
+    store.put({ ...userData, updatedAt: new Date().toISOString() })
+    await this._transactionDone(transaction)
   }
 
   async getUser(email) {
+    this._ensureDB()
     const transaction = this.db.transaction(["users"], "readonly")
     const store = transaction.objectStore("users")
-    return new Promise((resolve, reject) => {
-      const request = store.get(email)
-      request.onsuccess = () => resolve(request.result)
-      request.onerror = () => reject(request.error)
-    })
+    return this._requestToPromise(store.get(email))
+  }
+
+  async getAllUsers() {
+    this._ensureDB()
+    const transaction = this.db.transaction(["users"], "readonly")
+    const store = transaction.objectStore("users")
+    return this._requestToPromise(store.getAll())
   }
 
   async saveTrade(tradeData) {
+    this._ensureDB()
     const transaction = this.db.transaction(["trades"], "readwrite")
     const store = transaction.objectStore("trades")
-    return store.add({ ...tradeData, timestamp: new Date().toISOString() })
+    const request = store.add({ ...tradeData, timestamp: new Date().toISOString() })
+    const id = await this._requestToPromise(request)
+    await this._transactionDone(transaction)
+    return id
   }
 
   async getTradeHistory(userEmail, limit = 100) {
+    this._ensureDB()
     const transaction = this.db.transaction(["trades"], "readonly")
     const store = transaction.objectStore("trades")
     const index = store.index("userEmail")
-    return new Promise((resolve, reject) => {
-      const request = index.getAll(userEmail, limit)
-      request.onsuccess = () => resolve(request.result)
-      request.onerror = () => reject(request.error)
-    })
+    return this._requestToPromise(index.getAll(userEmail, limit))
   }
 
   async savePortfolioSnapshot(portfolioData) {
+    this._ensureDB()
     const transaction = this.db.transaction(["portfolios"], "readwrite")
     const store = transaction.objectStore("portfolios")
-    return store.add({ ...portfolioData, timestamp: new Date().toISOString() })
+    const request = store.add({ ...portfolioData, timestamp: new Date().toISOString() })
+    const id = await this._requestToPromise(request)
+    await this._transactionDone(transaction)
+    return id
   }
 
   async getPortfolioHistory(userEmail, days = 30) {
+    this._ensureDB()
     const transaction = this.db.transaction(["portfolios"], "readonly")
     const store = transaction.objectStore("portfolios")
     const index = store.index("userEmail")
@@ -108,45 +141,48 @@ class AlphaDB {
   }
 
   async saveAIInteraction(userEmail, query, response) {
+    this._ensureDB()
     const transaction = this.db.transaction(["aiHistory"], "readwrite")
     const store = transaction.objectStore("aiHistory")
-    return store.add({
+    const request = store.add({
       userEmail,
       query,
       response,
       timestamp: new Date().toISOString(),
     })
+    const id = await this._requestToPromise(request)
+    await this._transactionDone(transaction)
+    return id
   }
 
   async getAIHistory(userEmail, limit = 50) {
+    this._ensureDB()
     const transaction = this.db.transaction(["aiHistory"], "readonly")
     const store = transaction.objectStore("aiHistory")
     const index = store.index("userEmail")
-    return new Promise((resolve, reject) => {
-      const request = index.getAll(userEmail, limit)
-      request.onsuccess = () => resolve(request.result)
-      request.onerror = () => reject(request.error)
-    })
+    return this._requestToPromise(index.getAll(userEmail, limit))
   }
 
   async addToWatchlist(userEmail, ticker) {
+    this._ensureDB()
     const transaction = this.db.transaction(["watchlist"], "readwrite")
     const store = transaction.objectStore("watchlist")
-    return store.add({ userEmail, ticker, addedAt: new Date().toISOString() })
+    const request = store.add({ userEmail, ticker, addedAt: new Date().toISOString() })
+    const id = await this._requestToPromise(request)
+    await this._transactionDone(transaction)
+    return id
   }
 
   async getWatchlist(userEmail) {
+    this._ensureDB()
     const transaction = this.db.transaction(["watchlist"], "readonly")
     const store = transaction.objectStore("watchlist")
     const index = store.index("userEmail")
-    return new Promise((resolve, reject) => {
-      const request = index.getAll(userEmail)
-      request.onsuccess = () => resolve(request.result)
-      request.onerror = () => reject(request.error)
-    })
+    return this._requestToPromise(index.getAll(userEmail))
   }
 
   async clearUserData(userEmail) {
+    this._ensureDB()
     const stores = ["trades", "portfolios", "watchlist", "aiHistory"]
     const transaction = this.db.transaction(stores, "readwrite")
 
@@ -164,6 +200,6 @@ class AlphaDB {
       }
     })
 
-    return transaction.complete
+    await this._transactionDone(transaction)
   }
 }
