@@ -2,11 +2,30 @@
 
 // Authentication Page JavaScript - AlphaFlow
 const AuthPage = {
-  InputValidator: {},
-  AuthManager: {},
-  appDB: {},
+  InputValidator: null,
+  AuthManager: null,
+  appDB: null,
 
   async init() {
+    // Inicializa os modulos (classes definidas globalmente)
+    this.InputValidator = InputValidator
+    this.AuthManager = AuthManager
+    
+    // Inicializa o banco de dados IndexedDB
+    this.appDB = new AlphaDB()
+    try {
+      await this.appDB.init()
+      console.log("[v0] Banco de dados inicializado com sucesso")
+    } catch (error) {
+      console.error("[v0] Erro ao inicializar banco de dados:", error)
+    }
+
+    // Verifica se usuario ja esta logado - redireciona para area de investimentos
+    if (this.AuthManager.isAuthenticated()) {
+      window.location.href = "index.html"
+      return
+    }
+
     this.initParticles()
     this.initForms()
     this.checkURLParams()

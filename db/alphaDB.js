@@ -69,6 +69,16 @@ class AlphaDB {
     })
   }
 
+  async getAllUsers() {
+    const transaction = this.db.transaction(["users"], "readonly")
+    const store = transaction.objectStore("users")
+    return new Promise((resolve, reject) => {
+      const request = store.getAll()
+      request.onsuccess = () => resolve(request.result || [])
+      request.onerror = () => reject(request.error)
+    })
+  }
+
   async saveTrade(tradeData) {
     const transaction = this.db.transaction(["trades"], "readwrite")
     const store = transaction.objectStore("trades")
